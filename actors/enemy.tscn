@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvj4qmvfi43r4"]
+[gd_scene load_steps=14 format=3 uid="uid://bvj4qmvfi43r4"]
 
 [ext_resource type="Texture2D" uid="uid://bw6tjaveylhk" path="res://assets/Sprite Pack 2/4 - Robo Pumpkin/Walking (16 x 16).png" id="1_jhpf0"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_tn7gx"]
-[ext_resource type="Texture2D" uid="uid://cocdxucecp7ut" path="res://assets/Sprite Pack 2/4 - Robo Pumpkin/Hurt (16 x 16).png" id="2_vkxir"]
-[ext_resource type="Texture2D" uid="uid://b2pkidtsebb8" path="res://assets/Sprite Pack 2/4 - Robo Pumpkin/Standing (16 x 16).png" id="4_amrl7"]
+[ext_resource type="Texture2D" uid="uid://dxpoi54uxu254" path="res://assets/Sprite Pack 2/4 - Robo Pumpkin/pumpkin_new/Walking (16 x 16).png" id="3_nqjj5"]
+[ext_resource type="Texture2D" uid="uid://dh1o7e1w8kic7" path="res://assets/Sprite Pack 2/4 - Robo Pumpkin/pumpkin_new/Hurt (16 x 16).png" id="4_ab5d8"]
+[ext_resource type="Texture2D" uid="uid://b4cmr8f14dg73" path="res://assets/Sprite Pack 2/4 - Robo Pumpkin/pumpkin_new/Standing (16 x 16).png" id="5_lbnge"]
+[ext_resource type="PackedScene" uid="uid://d0qrmnlhmxhtv" path="res://prefabs/hitbox.tscn" id="6_np0lb"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v3kft"]
-radius = 6.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mbqe4"]
+radius = 4.0
+height = 12.0
 
 [sub_resource type="Animation" id="Animation_5stoe"]
 resource_name = "walk"
@@ -22,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_jhpf0")]
+"values": [ExtResource("3_nqjj5")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -91,7 +94,6 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_mdrvj"]
 resource_name = "hurt"
 length = 0.1
-loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -102,7 +104,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_vkxir")]
+"values": [ExtResource("4_ab5d8")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -132,7 +134,6 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_4m18f"]
 resource_name = "standing"
 length = 0.1
-loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -143,7 +144,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_amrl7")]
+"values": [ExtResource("5_lbnge")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -178,7 +179,10 @@ _data = {
 "walk": SubResource("Animation_5stoe")
 }
 
-[node name="enemy" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gv8xa"]
+size = Vector2(8, 2)
+
+[node name="enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_tn7gx")
@@ -189,8 +193,9 @@ texture = ExtResource("1_jhpf0")
 hframes = 2
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_v3kft")
+position = Vector2(0, -4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mbqe4")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 root_node = NodePath("../texture")
@@ -204,3 +209,11 @@ speed_scale = 0.5
 position = Vector2(0, -6)
 target_position = Vector2(-7, 0)
 collision_mask = 6
+
+[node name="hitbox" parent="." instance=ExtResource("6_np0lb")]
+
+[node name="collision2" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_gv8xa")
+
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]
