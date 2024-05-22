@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4hvodvbsksud"]
+[gd_scene load_steps=16 format=3 uid="uid://c4hvodvbsksud"]
 
 [ext_resource type="Texture2D" uid="uid://trvw2lvc4njc" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_k1jb4"]
 [ext_resource type="Texture2D" uid="uid://duaq81pvfn2ai" path="res://assets/Seasonal Tilesets/1 - Grassland/Grassland_entities (16 x 16).png" id="2_nkqyj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cqqra6x6s1pj3" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/3 - Cloud_cover_1.png" id="6_mtd6g"]
 [ext_resource type="Texture2D" uid="uid://dpcy0585scvok" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="7_n8gpe"]
 [ext_resource type="Texture2D" uid="uid://b6a6tm236g1c8" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="8_exsl1"]
+[ext_resource type="PackedScene" uid="uid://diogy668glx1o" path="res://prefabs/moving_platform.tscn" id="10_t071n"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_rakmt"]
 tile_data = PackedInt32Array(0, 589824, 3, 1, 655360, 3, 2, 655360, 3, 3, 851968, 3)
@@ -265,8 +266,19 @@ layer_0/tile_data = PackedInt32Array(1048577, 393216, 3, 1048578, 262144, 1, 104
 layer_1/name = "trees"
 layer_1/tile_data = PackedInt32Array(917516, 589825, 1, 917527, 327681, 1, 720902, 65537, 1, 851999, 65537, 1, 917551, 327681, 1, 786503, 589825, 1, 917569, 589825, 1, 983076, 327681, 5, 983077, 393217, 5, 983078, 458753, 5, 786436, 196609, 5, 917557, 917505, 4, 983093, 917505, 5, 917558, 983041, 4, 917559, 1048577, 4, 983095, 1048577, 5, 917560, 1114113, 4, 917561, 1179649, 4, 983097, 1179649, 5)
 
+[node name="moving_platform" parent="." instance=ExtResource("10_t071n")]
+position = Vector2(144, 156)
+scale = Vector2(1.5, 1.5)
+
+[node name="moving_platform2" parent="." instance=ExtResource("10_t071n")]
+position = Vector2(96, 212)
+scale = Vector2(1.5, 1.5)
+move_speed = 10.0
+distance = 64
+move_horizontal = false
+
 [node name="player" parent="." instance=ExtResource("3_xrdep")]
-position = Vector2(77, 181)
+position = Vector2(82, 167)
 
 [node name="BG" type="ParallaxBackground" parent="."]
 
