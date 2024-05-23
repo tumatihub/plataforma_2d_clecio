@@ -409,15 +409,18 @@ position = Vector2(8, 120)
 texture_normal = ExtResource("14_bq4ch")
 texture_pressed = ExtResource("15_mu7ji")
 action = "ui_left"
+visibility_mode = 1
 
 [node name="ui_right" type="TouchScreenButton" parent="controls"]
 position = Vector2(48, 120)
 texture_normal = ExtResource("16_0ekeg")
 texture_pressed = ExtResource("17_ntmpv")
 action = "ui_right"
+visibility_mode = 1
 
 [node name="ui_jump" type="TouchScreenButton" parent="controls"]
 position = Vector2(280, 120)
 texture_normal = ExtResource("18_0djt5")
 texture_pressed = ExtResource("19_cdcvs")
 action = "ui_accept"
+visibility_mode = 1
