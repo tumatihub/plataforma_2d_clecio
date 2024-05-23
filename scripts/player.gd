@@ -97,7 +97,8 @@ func _input(event):
 func _on_head_collider_body_entered(body: Node2D) -> void:
 	if body.has_method("break_sprite"):
 		body.hitpoints -= 1
-		if body.hitpoints < 1:
+		if body.hitpoints < 0:
 			body.break_sprite()
 		else:
-			body.animation_player.play("hit")
+			body.animation_player.play("hit_flash")
+			body.create_coin()
