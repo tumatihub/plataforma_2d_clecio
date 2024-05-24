@@ -85,7 +85,7 @@ sprite_frames = SubResource("SpriteFrames_s8o3i")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3csfm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
