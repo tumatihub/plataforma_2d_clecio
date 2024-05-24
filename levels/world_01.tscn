@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4hvodvbsksud"]
+[gd_scene load_steps=30 format=3 uid="uid://c4hvodvbsksud"]
 
 [ext_resource type="Texture2D" uid="uid://trvw2lvc4njc" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_k1jb4"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_t5psq"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://cuvrujccs22c3" path="res://assets/extras/ui_buttons_arrow_up_NORMAL.png" id="18_0djt5"]
 [ext_resource type="Texture2D" uid="uid://b3bpocrnlqh2o" path="res://assets/extras/ui_buttons_arrow_up_PRESSED.png" id="19_cdcvs"]
 [ext_resource type="PackedScene" uid="uid://uphdtrj0d282" path="res://prefabs/break_box.tscn" id="20_8h86c"]
+[ext_resource type="Script" path="res://scripts/warning_sign.gd" id="22_2t45x"]
+[ext_resource type="Texture2D" uid="uid://bc8c8a373x23e" path="res://assets/Mini FX, Items & UI/Mini UI/Speech_Emotes (16 x 16).png" id="23_0fcor"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_rakmt"]
 tile_data = PackedInt32Array(0, 589824, 3, 1, 655360, 3, 2, 655360, 3, 3, 851968, 3)
@@ -267,6 +269,9 @@ pattern_0 = SubResource("TileMapPattern_rakmt")
 shader = ExtResource("6_gl266")
 shader_parameter/move_speed = 0.05
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk1o5"]
+size = Vector2(32, 18)
+
 [node name="World-01" type="Node2D"]
 script = ExtResource("1_t5psq")
 
@@ -340,7 +345,7 @@ position = Vector2(40, 112)
 position = Vector2(40, 40)
 
 [node name="player" parent="." instance=ExtResource("3_xrdep")]
-position = Vector2(82, 167)
+position = Vector2(104, 192)
 
 [node name="BG" type="ParallaxBackground" parent="."]
 
@@ -417,6 +422,7 @@ position = Vector2(496, 232)
 position = Vector2(656, 232)
 
 [node name="controls" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ui_left" type="TouchScreenButton" parent="controls"]
 position = Vector2(8, 120)
@@ -447,3 +453,21 @@ position = Vector2(184, 72)
 
 [node name="break-box3" parent="." instance=ExtResource("20_8h86c")]
 position = Vector2(384, 128)
+
+[node name="warning_sign" type="Node2D" parent="."]
+position = Vector2(72, 200)
+script = ExtResource("22_2t45x")
+
+[node name="texture" type="Sprite2D" parent="warning_sign"]
+visible = false
+position = Vector2(0, -16)
+texture = ExtResource("23_0fcor")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="area_sign" type="Area2D" parent="warning_sign"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="warning_sign/area_sign"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_sk1o5")
