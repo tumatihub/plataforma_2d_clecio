@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c4hvodvbsksud"]
+[gd_scene load_steps=55 format=3 uid="uid://c4hvodvbsksud"]
 
 [ext_resource type="Texture2D" uid="uid://trvw2lvc4njc" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_k1jb4"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_t5psq"]
@@ -41,6 +41,7 @@
 [ext_resource type="Shader" path="res://shaders/transition.gdshader" id="39_cf38b"]
 [ext_resource type="Script" path="res://scripts/transition.gd" id="39_i6h3n"]
 [ext_resource type="Script" path="res://scripts/color_rect.gd" id="40_th3nv"]
+[ext_resource type="AudioStream" uid="uid://bbplcy8wrtriy" path="res://sounds/bg_music.wav" id="42_rclly"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_rakmt"]
 tile_data = PackedInt32Array(0, 589824, 3, 1, 655360, 3, 2, 655360, 3, 3, 851968, 3)
@@ -749,6 +750,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("40_th3nv")
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("42_rclly")
+volume_db = -13.721
+autoplay = true
 
 [connection signal="body_entered" from="spikes-area" to="spikes-area" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/control/clock_timer" to="HUD/control" method="_on_clock_timer_timeout"]

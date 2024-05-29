@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cfdxfwmfwclly"]
+[gd_scene load_steps=17 format=3 uid="uid://cfdxfwmfwclly"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_lm7wu"]
 [ext_resource type="Texture2D" uid="uid://boqpc2qe4bksg" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Hurt (32 x 32).png" id="2_fcwkr"]
 [ext_resource type="Texture2D" uid="uid://b1c7sdgmqyl3s" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Idle (32 x 32).png" id="2_owle0"]
 [ext_resource type="Texture2D" uid="uid://qdbl34j46785" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Jumping (32 x 32).png" id="3_ti06t"]
 [ext_resource type="Texture2D" uid="uid://cru0bx4evos67" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Running (32 x 32).png" id="4_raxyh"]
+[ext_resource type="AudioStream" uid="uid://de28708bliwti" path="res://sounds/jump_sfx.wav" id="6_f3v6c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yrekc"]
 atlas = ExtResource("2_owle0")
@@ -133,6 +134,10 @@ collision_mask = 64
 [node name="head_collision" type="CollisionShape2D" parent="head_collider"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_prrsk")
+
+[node name="jump_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_f3v6c")
+volume_db = -28.167
 
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_entered" from="head_collider" to="." method="_on_head_collider_body_entered"]

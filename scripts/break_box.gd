@@ -5,6 +5,8 @@ const coin_instance = preload("res://prefabs/coin_rigid.tscn")
 
 @onready var animation_player := $anim as AnimationPlayer
 @onready var spawn_coin := $spawn_coin as Marker2D
+@onready var hit_block: AudioStreamPlayer = $hit_block as AudioStreamPlayer
+
 @export var pieces: PackedStringArray
 @export var hitpoints := 3
 var impulse := 200
