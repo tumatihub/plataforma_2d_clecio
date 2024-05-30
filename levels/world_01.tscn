@@ -433,8 +433,9 @@ position = Vector2(1408, 232)
 [node name="base_patrol2" parent="enemies" instance=ExtResource("17_fu8lf")]
 position = Vector2(1016, 224)
 
-[node name="trex" parent="enemies" instance=ExtResource("14_3mrk1")]
+[node name="trex" parent="enemies" node_paths=PackedStringArray("target") instance=ExtResource("14_3mrk1")]
 position = Vector2(936, 256)
+target = NodePath("../../player")
 
 [node name="coins" type="Node2D" parent="."]
 
