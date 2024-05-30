@@ -581,6 +581,7 @@ position = Vector2(2304, 216)
 next_level = "res://levels/world_02.tscn"
 
 [node name="player" parent="." instance=ExtResource("3_xrdep")]
+z_index = 1
 position = Vector2(96, 192)
 
 [node name="spikes-area" type="Area2D" parent="."]

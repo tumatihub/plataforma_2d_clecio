@@ -4,7 +4,8 @@ extends CharacterBody2D
 const SPEED = 200.0
 const AIR_FRICTION := 0.5
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+const COIN_SCENE := preload("res://prefabs/coin_rigid.tscn")
+
 var is_jumping := false
 var is_hurted := false
 var knockback_vector := Vector2.ZERO
@@ -96,6 +97,8 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25):
 		animation.modulate = Color(1, 0, 0, 1)
 		knockback_tween.parallel().tween_property(animation, "modulate", Color(1, 1, 1, 1), duration)
 	
+	lose_coins()
+	
 	is_hurted = true
 	await get_tree().create_timer(0.3).timeout
 	is_hurted = false
@@ -139,3 +142,16 @@ func play_destroy_sfx():
 	sound_sfx.play()
 	await sound_sfx.finished
 	sound_sfx.queue_free()
+
+func lose_coins():
+	var lost_coins: int = min(Globals.coins, 5)
+	$collision.set_deferred("disabled", true)
+	Globals.coins -= lost_coins
+	for i in lost_coins:
+		var coin = COIN_SCENE.instantiate()
+		get_parent().call_deferred("add_child", coin)
+		coin.global_position = global_position
+		coin.apply_impulse(Vector2(randi_range(-100, 100), -250))
+	await get_tree().create_timer(0.5).timeout
+	$collision.set_deferred("disabled", false)
+
