@@ -601,6 +601,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("26_nbysw")
+default_minutes = 0
 default_seconds = 30
 
 [node name="clock_timer" type="Timer" parent="HUD/control"]
@@ -755,6 +756,9 @@ script = ExtResource("40_th3nv")
 stream = ExtResource("42_rclly")
 volume_db = -13.721
 autoplay = true
+
+[node name="player_start_position" type="Marker2D" parent="."]
+position = Vector2(96, 192)
 
 [connection signal="body_entered" from="spikes-area" to="spikes-area" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/control/clock_timer" to="HUD/control" method="_on_clock_timer_timeout"]
