@@ -8,6 +8,7 @@ const AIR_FRICTION := 0.5
 var is_jumping := false
 var is_hurted := false
 var knockback_vector := Vector2.ZERO
+var knockback_power := 20
 var direction
 
 #handle jump and gravity
@@ -70,10 +71,8 @@ func _physics_process(delta: float) -> void:
 			collision.get_collider().has_collided_with(collision, self)
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	if $ray_right.is_colliding():
-		take_damage(Vector2(-200, -200))
-	elif $ray_left.is_colliding():
-		take_damage(Vector2(200, -200))
+	var knockback = Vector2((global_position.x - body.global_position.x) * knockback_power, -200)
+	take_damage(knockback)
 	
 	if body.is_in_group("fireball"):
 		body.queue_free()
